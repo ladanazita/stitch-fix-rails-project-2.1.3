@@ -17,5 +17,8 @@ describe Item do
     it "should set the price_sold as 75% of the wholesale_price" do
       expect(item.price_sold).to eq(BigDecimal.new(wholesale_price) * BigDecimal.new("0.75"))
     end
+
+    # include test to set min price for pants and dress to $5
+    # min price for everything else $2
   end
 end
