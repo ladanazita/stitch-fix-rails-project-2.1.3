@@ -22,7 +22,10 @@
         <td>Clearance Batch <%= clearance_batch.id %></td>
         <td><%= l(clearance_batch.created_at, format: :short) %></td>
         <td><%= clearance_batch.items.count %></td>
-      </tr>
     <%- end -%>
+      </tr>
   </tbody>
 </table>
+
+
+<%= link_to 'Back', '/' %>

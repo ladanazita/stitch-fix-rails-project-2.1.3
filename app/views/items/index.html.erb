@@ -1,0 +1,29 @@
+<h1> Item List </h1>
+
+<table class="table table-striped clearance_batches">
+  <thead>
+    <tr>
+      <th>Item Number</th>
+      <th> Item </th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @items.each do |item| -%>
+      <tr>
+        <td>Item <%= item.id %></td>
+        <td><%= l(item.created_at, format: :short) %></td>
+        <td><%= l(item.updated_at, format: :short) %></td>
+        <td><%= item.status %></td>
+        <td><%= item.size %></td>
+        <td><%= item.color %></td>
+        <td><%= item.price_sold %></td>
+        <td><%= item.sold_at %></td>
+        <td><%= item.style_id %></td>
+      </tr>
+    <%- end -%>
+  </tbody>
+</table>
+
+
+<%= link_to 'Back', '/' %>
