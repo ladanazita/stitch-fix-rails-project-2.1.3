@@ -35,7 +35,7 @@ describe Item do
     end
 
     it "should return no results if none match query" do
-      expect { item }.should_not_receive(:status)
+      expect { item }.should_not_receive(:item)
     end
   end
 end

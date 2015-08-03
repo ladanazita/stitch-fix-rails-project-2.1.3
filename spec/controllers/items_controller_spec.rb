@@ -12,12 +12,12 @@ RSpec.describe ItemsController, type: :controller do
       expect(response).to render_template :index
     end
 
-    it 'assigns all items to @items' do
-      expect(assigns(:items)).to match_array items
-    end
-
     it 'success' do
       expect(response).to be_success
+    end
+
+    it 'assigns all items to @items' do
+      expect(assigns(:items)).to match_array items
     end
 
     it "orders items by created at date" do
