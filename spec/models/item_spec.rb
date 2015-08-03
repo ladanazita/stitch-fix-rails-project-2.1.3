@@ -17,8 +17,25 @@ describe Item do
     it "should set the price_sold as 75% of the wholesale_price" do
       expect(item.price_sold).to eq(BigDecimal.new(wholesale_price) * BigDecimal.new("0.75"))
     end
+  end
 
-    # include test to set min price for pants and dress to $5
-    # min price for everything else $2
+  describe ".search" do
+    let(:status) {"clearanced"}
+    let(:item) {FactoryGirl.create(:item, status: status)}
+    before do
+      Item.search("clearanced")
+    end
+
+    it "should return results based on input" do
+      expect(item.status).to eq("clearanced")
+    end
+
+    before do
+      Item.search("sellable")
+    end
+
+    it "should return no results if none match query" do
+      expect { item }.should_not_receive(:status)
+    end
   end
 end
