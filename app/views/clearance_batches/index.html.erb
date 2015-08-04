@@ -11,19 +11,21 @@
 <table class="table table-striped clearance_batches">
   <thead>
     <tr>
-      <th></th>
+      <th> Clearance Batch </th>
       <th>Date clearanced</th>
       <th>Number of items clearanced</th>
+      <th>View Report</th>
     </tr>
   </thead>
   <tbody>
     <%- @clearance_batches.each do |clearance_batch| -%>
       <tr>
-        <td>Clearance Batch <%= clearance_batch.id %></td>
+        <td># <%= clearance_batch.id %></td>
         <td><%= l(clearance_batch.created_at, format: :short) %></td>
         <td><%= clearance_batch.items.count %></td>
-    <%- end -%>
+        <td><%= link_to 'Report', clearance_batch_path(clearance_batch.id) %></td>
       </tr>
+    <%- end -%>
   </tbody>
 </table>
 

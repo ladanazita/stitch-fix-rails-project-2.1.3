@@ -19,11 +19,11 @@ describe ClearancingService do
       end
 
       it "encounters no errors" do
-        expect(@clearancing_status.errors.empty?).to be true 
+        expect(@clearancing_status.errors.empty?).to be true
       end
 
       it "adds all the items to the batch" do
-        expect(@clearancing_status.clearance_batch.items.pluck(:id).sort).to eq(items.map(&:id).sort) 
+        expect(@clearancing_status.clearance_batch.items.pluck(:id).sort).to eq(items.map(&:id).sort)
       end
 
       it "sets all items to 'clearanced' status" do

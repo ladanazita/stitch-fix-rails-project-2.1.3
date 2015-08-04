@@ -21,4 +21,9 @@ class ClearanceBatchesController < ApplicationController
     redirect_to action: :index
   end
 
+  def show
+    @clearance_batch = ClearanceBatch.find(params[:id])
+    @items = Item.where(clearance_batch_id: @clearance_batch)
+  end
+
 end
