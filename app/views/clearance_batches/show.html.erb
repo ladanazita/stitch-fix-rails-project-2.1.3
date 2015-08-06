@@ -5,13 +5,11 @@
       <th> Clearanced Batch ID </th>
       <th> Item Number </th>
       <th> Status </th>
-      <th> Created At </th>
-      <th> Updated At</th>
       <th> Size </th>
       <th> Color </th>
       <th> Price Sold </th>
-      <th> Sold At </th>
-      <th> Style ID </th>
+      <th> Retail Price </th>
+      <th> Style </th>
     </tr>
   </thead>
   <tbody>
@@ -20,13 +18,11 @@
         <td> # <%= item.clearance_batch_id %></td>
         <td> # <%= item.id %></td>
         <td><%= item.status %></td>
-        <td><%= l(item.created_at, format: :short) %></td>
-        <td><%= l(item.updated_at, format: :short) %></td>
         <td><%= item.size %></td>
         <td><%= item.color %></td>
         <td><%= item.price_sold %></td>
-        <td><%= item.sold_at %></td>
-        <td><%= item.style_id %></td>
+        <td><%= item.style.retail_price %></td>
+        <td><%= item.style.type %></td>
       </tr>
     <%- end -%>
   </tbody>
