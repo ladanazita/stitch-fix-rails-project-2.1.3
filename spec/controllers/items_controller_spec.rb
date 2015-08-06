@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe ItemsController, type: :controller do
   let(:items) {FactoryGirl.create_list(:item, 4)}
+  let(:item_1) {FactoryGirl.create(:item, created_at: "Mon, 03 Aug 2015 03:08:27 UTC +00:00")}
+  let(:item_2) {FactoryGirl.create(:item, created_at: "Tues, 04 Aug 2015 03:08:27 UTC +00:00")}
+  let(:item_3){ FactoryGirl.create(:item, created_at: "Wed, 05 Aug 2015 03:08:27 UTC +00:00")}
 
   describe '#index' do
 
@@ -21,14 +24,8 @@ RSpec.describe ItemsController, type: :controller do
     end
 
     it "orders items by created at date" do
-
-      second = Item.create!(created_at: "Tues, 04 Aug 2015 03:08:27 UTC +00:00")
-      first = Item.create!(created_at: "Mon, 03 Aug 2015 03:08:27 UTC +00:00")
-      third = Item.create!(created_at: "Wed, 05 Aug 2015 03:08:27 UTC +00:00")
-
       results = Item.order('created_at DESC')
-
-      results == [first, second, third]
+      results == [item_1, item_2, item_3]
     end
 
   end
