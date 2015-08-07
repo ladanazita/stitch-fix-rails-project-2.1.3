@@ -1,17 +1,20 @@
 <h2>Clearance Batches</h2>
 
+
 <%= form_tag(clearance_batches_path, multipart: true, class: 'form-inline', role: 'form') do %>
   <div class="form-group">
     <%= label_tag 'csv_batch_file', 'Select batch file' %>
     <%= file_field_tag 'csv_batch_file', class: 'form-control' %>
+    <%= label_tag 'item_number','Input items separated by commas'%>
+    <%= text_field_tag 'item_number[]' %>
   </div>
-  <%= button_tag 'upload batch file', class: 'btn btn-primary' %>
+  <%= button_tag 'upload batch ', class: 'btn btn-primary' %>
 <% end %>
 
 <table class="table table-striped clearance_batches">
   <thead>
     <tr>
-      <th> Clearance Batch </th>
+      <th>Clearance Batch </th>
       <th>Date clearanced</th>
       <th>Number of items clearanced</th>
       <th>View Report</th>

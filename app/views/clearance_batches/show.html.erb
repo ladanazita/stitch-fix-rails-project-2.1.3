@@ -9,6 +9,7 @@
       <th> Color </th>
       <th> Price Sold </th>
       <th> Retail Price </th>
+      <th> Wholesale Price </th>
       <th> Style </th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
         <td><%= item.color %></td>
         <td><%= item.price_sold %></td>
         <td><%= item.style.retail_price %></td>
+        <td><%= item.style.wholesale_price %></td>
         <td><%= item.style.type %></td>
       </tr>
     <%- end -%>
