@@ -21,11 +21,83 @@ describe "add new monthly clearance_batch" do
 
     end
 
-    describe "add a new clearance batch" do
+    describe "input a new clearance batch with item numbers" do
 
       context "total success" do
 
-        it "should allow a user to upload a new clearance batch successfully" do
+        it "should allow a user to input item numbers as a new clearance batch successfully" do
+
+          items = 3.times.map { FactoryGirl.create(:item) }
+          inputs = "1, 2, 3"
+          visit "/clearance_batches"
+          within('table.clearance_batches') do
+            expect(page).not_to have_content(/Clearance Batch \d+/)
+          end
+
+          fill_in 'item_number_', with: inputs
+          click_button "upload batch"
+          new_batch = ClearanceBatch.first
+
+          expect(page).to have_content("#{items.count} items clearanced in batch #{new_batch.id}")
+          expect(page).not_to have_content("item ids raised errors and were not clearanced")
+
+          within("table.clearance_batches") do
+            expect(page).to have_content(/Clearance Batch \d+/)
+          end
+        end
+      end
+
+      context "partial success" do
+
+        it "should allow a user to input a new clearance batch partially successfully, and report on errors" do
+
+          items = 3.times.map { FactoryGirl.create(:item) }
+          inputs = "1, 2, 3, 'no thanks', 194323 "
+
+          visit "/clearance_batches"
+          within('table.clearance_batches') do
+            expect(page).not_to have_content(/Clearance Batch \d+/)
+          end
+
+          fill_in 'item_number_', with: inputs
+          click_button "upload batch"
+          new_batch = ClearanceBatch.first
+
+          expect(page).to have_content(" #{items.count} items clearanced in batch #{new_batch.id}")
+          expect(page).to have_content("2 item ids raised errors and were not clearanced")
+          within('table.clearance_batches') do
+            expect(page).to have_content(/Clearance Batch \d+/)
+
+          end
+        end
+      end
+
+      context "total failure" do
+
+        it "should allow a user to input a new clearance batch that totally fails to be clearanced" do
+          inputs = "987654, 'no thanks'"
+          visit "/clearance_batches"
+          within('table.clearance_batches') do
+            expect(page).not_to have_content(/Clearance Batch \d+/)
+          end
+          fill_in 'item_number_', with: inputs
+          click_button "upload batch"
+          expect(page).not_to have_content("items clearanced in batch")
+          expect(page).to have_content("No new clearance batch was added")
+          expect(page).to have_content("2 item ids raised errors and were not clearanced")
+          within('table.clearance_batches') do
+            expect(page).not_to have_content(/Clearance Batch \d+/)
+          end
+        end
+      end
+
+    end
+
+    describe "upload a new clearance batch with CSV" do
+
+      context "total success" do
+
+        it "should allow a user to upload file as a new clearance batch successfully" do
           items = 5.times.map{ FactoryGirl.create(:item) }
           file_name = generate_csv_file(items)
           visit "/clearance_batches"
@@ -33,7 +105,7 @@ describe "add new monthly clearance_batch" do
             expect(page).not_to have_content(/Clearance Batch \d+/)
           end
           attach_file("Select batch file", file_name)
-          click_button "upload batch file"
+          click_button "upload batch"
           new_batch = ClearanceBatch.first
           expect(page).to have_content("#{items.count} items clearanced in batch #{new_batch.id}")
           expect(page).not_to have_content("item ids raised errors and were not clearanced")
@@ -41,7 +113,6 @@ describe "add new monthly clearance_batch" do
             expect(page).to have_content(/Clearance Batch \d+/)
           end
         end
-
       end
 
       context "partial success" do
@@ -55,7 +126,7 @@ describe "add new monthly clearance_batch" do
             expect(page).not_to have_content(/Clearance Batch \d+/)
           end
           attach_file("Select batch file", file_name)
-          click_button "upload batch file"
+          click_button "upload batch"
           new_batch = ClearanceBatch.first
           expect(page).to have_content("#{valid_items.count} items clearanced in batch #{new_batch.id}")
           expect(page).to have_content("#{invalid_items.count} item ids raised errors and were not clearanced")
@@ -76,7 +147,7 @@ describe "add new monthly clearance_batch" do
             expect(page).not_to have_content(/Clearance Batch \d+/)
           end
           attach_file("Select batch file", file_name)
-          click_button "upload batch file"
+          click_button "upload batch"
           expect(page).not_to have_content("items clearanced in batch")
           expect(page).to have_content("No new clearance batch was added")
           expect(page).to have_content("#{invalid_items.count} item ids raised errors and were not clearanced")

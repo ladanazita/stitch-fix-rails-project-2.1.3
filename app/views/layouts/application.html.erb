@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TakeHomeChallenge</title>
+  <title>Stitch Fix Clearance Tool</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -9,6 +9,7 @@
 <body>
 
 <div class="container">
+  <%= image_tag("SF-Logo.jpg", :alt => "StichFix logo") %>
   <h1>Stitch Fix Clearance Tool</h1>
   <%- if flash[:notice] -%>
     <div class="alert alert-info" role="alert">
