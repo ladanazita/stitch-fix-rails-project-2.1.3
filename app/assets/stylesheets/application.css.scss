@@ -7,3 +7,37 @@
  */
 
 body { padding-top: 70px; }
+h1,
+h2,
+h3,
+h4{
+  text-align: center;
+}
+p { text-align: center}
+.back { float: right; }
+.form-control{margin: 5px;}
+.upload {
+  margin: 2em;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.flickr_pagination{
+    margin: 2em;
+}
