@@ -42,7 +42,7 @@ describe Item do
   describe ".search" do
 
     let(:status) {"clearanced"}
-    let(:item) {FactoryGirl.create(:item, status: status)}
+    let(:item) {FactoryGirl.create(:item, status: status, clearance_batch_id: 1)}
     before do
       Item.search("clearanced")
     end
@@ -58,6 +58,23 @@ describe Item do
     it "should return no results if none match query" do
       expect{ item }.should_not_receive(:item)
     end
+
+    before do
+      Item.search(1)
+    end
+
+    it "should return results based on input" do
+      expect(item.clearance_batch_id).to eq(1)
+    end
+
+    before do
+      Item.search(2)
+    end
+
+    it "should return no results if none match query" do
+      expect{ item }.should_not_receive(:item)
+    end
+
   end
 
 end
