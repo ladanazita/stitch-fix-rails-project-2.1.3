@@ -78,6 +78,4 @@ I consulted with Megan, the recruiter I was talking with, to indicate the additi
 
 <h3> Styling </h3>
 
-I added pagination and a simple image to lively up the app. 
-
-    where("status like ? OR clearance_batch_id like ?", "%#{search}%", "%#{search}%" )
+I added pagination and a simple image to lively up the app. The footer is just a Bootstrap default, and the pagination style was infulenced by Flickr

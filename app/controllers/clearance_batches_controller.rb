@@ -2,6 +2,7 @@ class ClearanceBatchesController < ApplicationController
 
   def index
     @clearance_batches  = ClearanceBatch.all
+    @clearance_batches = @clearance_batches.paginate(:page => params[:page], :per_page => 20)
   end
 
   def create
